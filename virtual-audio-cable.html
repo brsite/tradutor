@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Audio Cable - Curso de Áudios Automatizados</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Virtual Audio Cable: Gerenciamento de Áudio</h1>
+    <p>Configure cabos virtuais para direcionar áudio entre aplicativos.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Introdução</a></li>
+      <li><a href="balabolka.html">Balabolka</a></li>
+      <li><a href="virtual-audio-cable.html">Virtual Audio Cable</a></li>
+      <li><a href="soundpad.html">Soundpad</a></li>
+      <li><a href="scripts-automacao.html">Scripts de Automação</a></li>
+      <li><a href="boas-praticas.html">Boas Práticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+   <section>
+  <h2>Introdução ao Virtual Audio Cable</h2>
+  <p>O Virtual Audio Cable (VAC) é um software que cria cabos de áudio virtuais, permitindo conectar a saída de áudio de um aplicativo à entrada de outro. Essa funcionalidade é especialmente útil para aplicativos que não se comunicam diretamente com um microfone, como o Balabolka, possibilitando a criação de um microfone virtual para uso com o Soundpad.</p>
+  <p><strong>Aviso:</strong> Este curso foca no uso do Virtual Audio Cable pelo Tradutor Competitivo como substituto de um microfone real. Não abordaremos a integração desses programas com um microfone físico, que fica por sua conta e risco.</p>
+  <div style="text-align: center;">
+    <img src="img/vac1.png" alt="Página de Download do Virtual Audio Cable" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Instalando o Virtual Audio Cable</h2>
+  <p>Para começar, faça o download do Virtual Audio Cable no site oficial em <a href="https://vb-audio.com/Cable/">https://vb-audio.com/Cable/</a>.</p>
+  <p>Após baixar o arquivo .zip, extraia seu conteúdo e execute o instalador "VBCABLE_Setup_x64.exe". Conclua a instalação seguindo as instruções na tela e reinicie o computador para que as alterações entrem em vigor.</p>
+  <div style="text-align: center;">
+    <img src="img/vac2.png" alt="Download do Arquivo ZIP do VAC" style="max-width: 100%; height: auto;">
+  </div>
+  <div style="text-align: center;">
+    <img src="img/vac3.png" alt="Instalação do VAC" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Entendendo os Dispositivos de Áudio Virtuais</h2>
+  <p>Após a reinicialização, o sistema reconhecerá dois novos dispositivos de áudio: o "CABLE Input" e o "CABLE Output".</p>
+  <p>O "CABLE Input" funciona como um alto-falante virtual. Todo áudio reproduzido por ele é encaminhado automaticamente para o "CABLE Output", que atua como um microfone virtual.</p>
+  <div style="text-align: center;">
+    <img src="img/vac4.png" alt="Dispositivo CABLE Input" style="max-width: 100%; height: auto;">
+  </div>
+  <div style="text-align: center;">
+    <img src="img/vac5.png" alt="Dispositivo CABLE Output" style="max-width: 100%; height: auto;">
+  </div>
+  <p>O "CABLE Output" reproduz o áudio recebido do "CABLE Input". Por exemplo, se você usar o VLC Media Player para tocar um filme e configurar a saída de áudio para o "CABLE Input", o som do filme será captado pelo "CABLE Output" e poderá ser transmitido em jogos, como o Counter-Strike. Neste curso, usaremos essa configuração para enviar o áudio gerado pelo Balabolka ao microfone virtual.</p>
+</section>
+
+<section>
+  <h2>Configurando o Balabolka com o Virtual Audio Cable</h2>
+  <p>Para integrar o Balabolka ao Virtual Audio Cable, abra o Balabolka e acesse o menu "Opções", selecionando a opção "Saída de Áudio".</p>
+  <p>Escolha o dispositivo "CABLE Input" como a saída de áudio padrão. Com essa configuração, qualquer texto lido pelo Balabolka, seja com a voz do Tradutor ou outra voz de sua preferência, será enviado diretamente ao microfone virtual "CABLE Output".</p>
+  <div style="text-align: center;">
+    <img src="img/vac6.png" alt="Configuração de Saída de Áudio no Balabolka" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Ativando a Escuta do Microfone Virtual</h2>
+  <p>Se você não estiver ouvindo o áudio gerado pelo Balabolka, é necessário ativar a função "Escutar Dispositivo" no Windows para monitorar o som do "CABLE Output".</p>
+  <p>Acesse as configurações de áudio do Windows, clique na aba "Gravação", localize o dispositivo "CABLE Output", clique com o botão direito sobre ele e selecione "Propriedades".</p>
+  <div style="text-align: center;">
+    <img src="img/vac7.png" alt="Propriedades do CABLE Output" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Na aba "Escutar", marque a opção "Escutar Dispositivo" e selecione o alto-falante ou fone de ouvido padrão do seu sistema como dispositivo de saída. Clique em "Aplicar" e "OK". Agora, você conseguirá ouvir o áudio reproduzido pelo microfone virtual do Virtual Audio Cable.</p>
+  <div style="text-align: center;">
+    <img src="img/vac8.png" alt="Configuração de Escuta do CABLE Output" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Configurando o CABLE Output como Microfone Padrão</h2>
+  <p>Para que o áudio do Balabolka ou do Soundpad seja transmitido em jogos ou aplicativos de voz, configure o "CABLE Output" como o microfone padrão no sistema.</p>
+  <p>Acesse as configurações de áudio do Windows, vá para a aba "Gravação", clique com o botão direito no "CABLE Output" e selecione "Definir como dispositivo padrão". Assim, jogos como Counter-Strike ou aplicativos como o Discord usarão o "CABLE Output" para captar o áudio gerado pelo Balabolka ou Soundpad.</p>
+  <div style="text-align: center;">
+    <img src="img/vac9.png" alt="Definindo CABLE Output como Microfone Padrão" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Dica Experimental: Integrando um Microfone Real</h2>
+  <p><strong>Atenção:</strong> Esta é uma configuração experimental e não foi testada. Use por sua conta e risco.</p>
+  <p>Para combinar o áudio de um microfone real com o áudio do Virtual Audio Cable, você pode ativar a opção "Escutar Dispositivo" no seu microfone físico, configurando-o para enviar o áudio ao "CABLE Input".</p>
+  <p>Acesse as configurações de áudio do Windows, vá para a aba "Gravação", clique com o botão direito no seu microfone real, selecione "Propriedades", e na aba "Escutar", marque "Escutar Dispositivo", escolhendo o "CABLE Input" como saída. Isso pode permitir que o áudio do microfone real seja misturado ao áudio do Balabolka ou Soundpad no "CABLE Output".</p>
+  <p><strong>Nota:</strong> Essa configuração pode causar problemas, como estalos ou clipping, dependendo da qualidade do microfone e da configuração do sistema. Teste cuidadosamente antes de usar em situações críticas.</p>
+  <div style="text-align: center;">
+    <img src="img/vac10.png" alt="Configuração Experimental do Microfone Real" style="max-width: 100%; height: auto;">
+  </div>
+  <div style="text-align: center;">
+    <img src="img/vac11.png" alt="Escuta do Microfone Real para CABLE Input" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+  </main>
+
+  <footer>
+    <p>© 2025 Curso de Áudios Automatizados. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
