@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripts de Automação - Curso de Áudios Automatizados</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Scripts de Automação</h1>
+    <p>Automatize downloads de áudio e interações com IAs.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Introdução</a></li>
+      <li><a href="balabolka.html">Balabolka</a></li>
+      <li><a href="virtual-audio-cable.html">Virtual Audio Cable</a></li>
+      <li><a href="soundpad.html">Soundpad</a></li>
+      <li><a href="scripts-automacao.html">Scripts de Automação</a></li>
+      <li><a href="videoaula.html">Videoaula</a></li>
+      <li><a href="boas-praticas.html">Boas Práticas</a></li>
+    </ul>
+  </nav>
+  <main>
+<section>
+  <h2>Introdução aos Scripts de Automação de Áudio</h2>
+  <p>Neste guia, você aprenderá a utilizar scripts personalizados que desenvolvi para diversas finalidades, incluindo a obtenção de áudios do site MyInstants para uso em jogos, o download de áudios do YouTube, e a criação de uma assistente virtual estilo "Alexa" com respostas irônicas, piadas e geração de músicas no estilo rap. Estes scripts foram criados de forma improvisada, combinando códigos obtidos de fontes como Stack Overflow e orientações do ChatGPT. Ressalto que não há garantia de funcionamento perfeito em todos os sistemas, sendo recomendável utilizá-los por sua conta e risco, com cautela durante a configuração e execução.</p>
+</section>
+
+<section>
+  <h2>Script para Download de Áudio do MyInstants</h2>
+  <p>Este script permite baixar áudios do site MyInstants de forma automatizada, utilizando o conteúdo da área de transferência do Windows. Ele realiza uma busca no site, analisa o código HTML da página de resultados, identifica o primeiro arquivo MP3 encontrado, gera um link de download e salva o áudio como "my.mp3".</p>
+  <p>Para utilizá-lo, faça o download do script <a href="scripts/MyInstants.zip">aqui</a> e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\MyInstants</code>.</p>
+  <div style="text-align: center;">
+    <img src="img/script1.png" alt="Arquivos do Script MyInstants" style="max-width: 100%; height: auto;">
+  </div>
+  <p>A pasta contém diversos arquivos essenciais para o funcionamento do script. O executável principal é o <code>MyInstants.bat</code>, que depende de outros programas, como:</p>
+  <ul>
+    <li><code>paste.exe</code>: Captura o conteúdo da área de transferência do Windows.</li>
+    <li>Programas portados do Linux (<code>tail</code>, <code>wget</code>, <code>gawk</code>, <code>cut</code>, <code>sed</code>, entre outros): Realizam a manipulação do código HTML baixado do site para extrair o link de download.</li>
+    <li><code>beep.exe</code>: Emite um bipe para indicar download bem-sucedido ou dois bipes em caso de erro, como áudio não encontrado ou bloqueio pelo site.</li>
+    <li><code>ffplay.exe</code>: Um player de áudio de linha de comando que reproduz o arquivo baixado nos fones de ouvido ou alto-falantes, sem transmiti-lo pelo microfone, permitindo verificar o áudio antes de usá-lo.</li>
+  </ul>
+  <p>Embora seja possível reescrever o script usando apenas comandos do PowerShell para torná-lo nativo do Windows, testes indicaram que essa abordagem resulta em um processo significativamente mais lento, levando cerca de 5 segundos por download, enquanto a solução atual, com ferramentas portadas do Linux, é praticamente instantânea.</p>
+  <p><strong>Pré-requisito</strong>: Para o script funcionar corretamente, é necessário ter o Microsoft .NET Framework 3.5 instalado. Caso não tenha, faça o download em <a href="https://www.microsoft.com/pt-BR/download/details.aspx?id=21">https://www.microsoft.com/pt-BR/download/details.aspx?id=21</a>.</p>
+  <div style="text-align: center;">
+    <img src="img/script2.png" alt="Execução do Script MyInstants" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Para usar o script, digite o nome de um meme ou áudio, selecione e copie o texto (CTRL+C) e execute o <code>MyInstants.bat</code>. O áudio será salvo como "my.mp3".</p>
+  <p>Para facilitar o uso em jogos, adicione o arquivo "my.mp3" ao Soundpad e configure um atalho, como ALT+R. Após ouvir o áudio nos fones de ouvido, pressione o atalho para reproduzi-lo no Soundpad, transmitindo-o pelo microfone virtual.</p>
+  <div style="text-align: center;">
+    <img src="img/script3.png" alt="Atalho no Soundpad para my.mp3" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Para automação com um único botão, a configuração do AntiMicroX será abordada em uma seção posterior.</p>
+</section>
+
+<section>
+  <h2>Script para Download de Áudio do YouTube</h2>
+  <p>Este script permite baixar áudios do YouTube a partir de um link ou termo copiado para a área de transferência do Windows, salvando-o como "musica.m4a".</p>
+  <p>Faça o download do script <a href="scripts/Youtube.zip">aqui</a> e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\Youtube</code>.</p>
+  <div style="text-align: center;">
+    <img src="img/script4.png" alt="Arquivos do Script YouTube" style="max-width: 100%; height: auto;">
+  </div>
+  <p>O executável principal é o <code>youtube.bat</code>, que utiliza:</p>
+  <ul>
+    <li><code>youtube-dl.exe</code>: Baixa o áudio do YouTube.</li>
+    <li><code>paste.exe</code>: Lê o conteúdo da área de transferência.</li>
+    <li><code>sed.exe</code>: Remove marcadores como "//" do texto copiado, úteis para evitar que o Balabolka leia o termo pesquisado (caso a opção de ignorar comentários esteja ativada).</li>
+    <li><code>ffplay.exe</code>: Reproduz o áudio baixado nos fones de ouvido.</li>
+    <li><code>kill.bat</code>: Encerra a reprodução do <code>ffplay.exe</code> e o processo do <code>youtube-dl.exe</code>, se necessário.</li>
+  </ul>
+  <p>Por exemplo, se você escrever "//música da Xuxa" e copiar, o script baixará o áudio correspondente sem que o Balabolka o leia, desde que a opção de ignorar comentários ("// Single-line comment") esteja habilitada.</p>
+  <p>Para usar o áudio no Soundpad, adicione o arquivo "musica.m4a" e configure um atalho, como F12.</p>
+  <div style="text-align: center;">
+    <img src="img/script5.png" alt="Atalho no Soundpad para musica.m4a" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Script da Alexa Irônica</h2>
+  <p>O script da "Alexa Irônica" é um conjunto de scripts que integra múltiplos programas e serviços para criar uma assistente virtual com respostas irônicas, piadas e geração de músicas. Devido à sua complexidade e natureza improvisada, não há garantia de funcionamento em todos os sistemas.</p>
+  <p>Faça o download do script <a href="scripts/Alexa.zip">aqui</a> e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\Alexa</code>.</p>
+  <div style="text-align: center;">
+    <img src="img/script6.png" alt="Arquivos do Script Alexa Irônica" style="max-width: 100%; height: auto;">
+  </div>
+  <p>O script principal é o <code>chatbot.bat</code>, que analisa o conteúdo da área de transferência do Windows e executa o script correspondente com base no comando inicial:</p>
+  <ul>
+    <li><strong>"alexa"</strong>: Executa o <code>alexa.bat</code>, enviando o texto da área de transferência ao serviço de IA da Pollinations.ai para gerar uma resposta irônica. O resultado é salvo em <code>saida.txt</code> e convertido em áudio pelo <code>Balcon.exe</code> (versão de linha de comando do Balabolka), gerando o arquivo <code>resultado.wav</code>. Adicione este arquivo ao Soundpad com um atalho, como F11.</li>
+    <div style="text-align: center;">
+      <img src="img/script7.png" alt="Atalho no Soundpad para resultado.wav" style="max-width: 100%; height: auto;">
+    </div>
+    <li><strong>"alexapia"</strong>: Executa o <code>alexapiada.bat</code>, selecionando aleatoriamente uma das 1432 piadas do arquivo <code>charadas.txt</code> e sintetizando o áudio, que é enviado diretamente ao <code>CABLE Input</code>.</li>
+    <li><strong>"alexamus"</strong>: Executa o <code>alexamus.bat</code>, usando o GPT-4o para gerar letras de música no estilo rap com base no tema especificado (ex.: "alexamus tema da música"). O áudio é sintetizado pelo <code>Balcon.exe</code>, acelerado e mixado com uma das quatro batidas da pasta <code>batidas</code> usando o <code>ffmpeg</code>, salvando o resultado em <code>resultado.wav</code>.</li>
+    <li><strong>"gpt"</strong>: Solicita uma resposta curta do modelo ChatGPT, sintetizada com a voz masculina Brian Multilingual e salva em <code>resultado.wav</code>.</li>
+    <li><strong>"alexatocar"</strong>: Similar ao script do YouTube, mas com a voz da Alexa dizendo "Entendi, tocando nome da música" antes de baixar o áudio do YouTube e salvá-lo como <code>musica.m4a</code>.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Automação com AntiMicroX</h2>
+  <p>Para automatizar a execução dos scripts, recomendo usar um joystick USB genérico, como um modelo de SNES, compatível com o programa AntiMicroX.</p>
+  <div style="text-align: center;">
+    <img src="img/script8.png" alt="Configuração do AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Faça o download do AntiMicroX no site oficial: <a href="https://github.com/AntiMicroX/antimicrox/releases">https://github.com/AntiMicroX/antimicrox/releases</a>. Configure atalhos para cada tecla do joystick, associando macros que executam CTRL+A e CTRL+C para copiar o texto para a área de transferência, seguidos da execução do script correspondente.</p>
+  <div style="text-align: center;">
+    <img src="img/script9.png" alt="Atalho para youtube.bat no AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Configure um atalho similar para o <code>chatbot.bat</code> para executar os scripts da Alexa.</p>
+  <div style="text-align: center;">
+    <img src="img/script10.png" alt="Atalho para chatbot.bat no AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Crie um atalho para o <code>kill.bat</code> (da pasta do script do YouTube), que encerra o <code>ffplay.exe</code> usado para reproduzir áudios do YouTube em segundo plano.</p>
+  <div style="text-align: center;">
+    <img src="img/script11.png" alt="Atalho para kill.bat no AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Por fim, configure um atalho para o <code>MyInstants.bat</code>, que é especialmente útil para downloads rápidos de áudios do MyInstants.</p>
+  <div style="text-align: center;">
+    <img src="img/script12.png" alt="Atalho para MyInstants.bat no AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+</section>
+
+<section>
+  <h2>Configuração Personalizada do Joystick</h2>
+  <div style="text-align: center;">
+    <img src="img/script13.png" alt="Configuração do Joystick no AntiMicroX" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Eu configuro meu joystick da seguinte forma, utilizando um modelo genérico de SNES USB. Você pode usar qualquer joystick compatível com o AntiMicroX, incluindo controles originais de Xbox 360 ou PS4. Alternativas como o Stream Deck também são viáveis, mas devem ser configuradas por sua conta e risco. Boa sorte na implementação!</p>
+</section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tradutor Competitivo. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

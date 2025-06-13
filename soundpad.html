@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundpad - Curso de Áudios Automatizados</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Soundpad: Efeitos Sonoros</h1>
+    <p>Organize e reproduza áudios com atalhos para jogos e chats.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Introdução</a></li>
+      <li><a href="balabolka.html">Balabolka</a></li>
+      <li><a href="virtual-audio-cable.html">Virtual Audio Cable</a></li>
+      <li><a href="soundpad.html">Soundpad</a></li>
+      <li><a href="scripts-automacao.html">Scripts de Automação</a></li>
+      <li><a href="videoaula.html">Videoaula</a></li>
+      <li><a href="boas-praticas.html">Boas Práticas</a></li>
+    </ul>
+  </nav>
+
+  <main>
+<section>
+  <h2>Introdução ao Soundpad</h2>
+  <div style="text-align: center;">
+    <img src="img/soundpad.png" alt="Interface do Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p>O Soundpad é um software para Windows que permite reproduzir sons personalizados em chats de voz ou jogos, transmitindo-os pelo microfone com alta qualidade de áudio. Funcionando como uma mesa de som virtual (soundboard), ele é ideal para criar momentos divertidos em chamadas no Discord, TeamSpeak, Skype ou jogos como Counter-Strike 2 (CS2) e Dota 2.</p>
+  <p>Com o Soundpad, você pode tocar efeitos sonoros, músicas ou gravações personalizadas, utilizando atalhos de teclado para acesso rápido. O programa se integra diretamente ao dispositivo de gravação padrão (geralmente o microfone) do Windows, eliminando a necessidade de dispositivos virtuais adicionais, a menos que esteja configurado para tal. Ele suporta formatos de áudio como MP3, WAV, M4A, AAC, FLAC, OGG, OPUS e WMA, oferecendo recursos como:</p>
+  <ul>
+    <li><strong>Atalhos (hotkeys):</strong> Permitem tocar sons rapidamente, mesmo em jogos em tela cheia.</li>
+    <li><strong>Normalização de volume:</strong> Ajusta automaticamente o volume para evitar picos altos ou baixos.</li>
+    <li><strong>Gravador e editor de áudio:</strong> Possibilita gravar e editar sons diretamente no programa.</li>
+    <li><strong>Integração com chats de voz:</strong> Compatível com qualquer aplicativo que utilize o microfone, como Discord ou TeamSpeak.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Configurando o Soundpad</h2>
+  <h2>1. Instalação</h2>
+  <p>Para começar, acesse o site oficial do Soundpad em <a href="http://www.leppsoft.com">http://www.leppsoft.com</a> ou a loja do Steam para baixar a versão demo ou completa do programa.</p>
+  <p>Execute o instalador e siga as instruções na tela. Por padrão, o Soundpad se integra automaticamente ao dispositivo de gravação padrão do Windows (geralmente o microfone). Se você utiliza múltiplos microfones, será necessário configurá-lo manualmente, conforme descrito adiante.</p>
+  <p><strong>Nota:</strong> Em alguns casos, o Soundpad pode exigir permissões de administrador para funcionar corretamente, especialmente ao reiniciar o serviço de áudio do Windows.</p>
+  <h2>2. Configuração do Dispositivo de Áudio</h2>
+  <p>Abra o Soundpad e acesse o menu "Arquivo > Preferências > Dispositivos".</p>
+  <p>Verifique se o microfone que você utiliza em jogos ou aplicativos de voz está selecionado, indicado por um ícone verde de checkmark.</p>
+  <p>Clique em "Reiniciar Serviço de Áudio do Windows" para reiniciar o serviço de áudio do Windows (pode exigir permissões de administrador). Confirme clicando em "Sim".</p>
+  <p>Finalize salvando as alterações com "Aplicar" e "OK".</p>
+  <p><strong>Dica:</strong> Certifique-se de que o microfone selecionado no Soundpad seja o mesmo configurado em aplicativos como Discord ou CS2. Caso contrário, os sons não serão transmitidos.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad2.png" alt="Configuração de Dispositivos do Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <h2>3. Desativação de Filtros de Voz</h2>
+  <p>Alguns aplicativos de chat, como o Discord, possuem filtros de voz, como supressão de ruído ou cancelamento de eco, que podem distorcer ou bloquear os sons do Soundpad. Para evitar isso:</p>
+  <ol>
+    <li>Abra o Discord e vá para "Configurações do Usuário > Voz e Vídeo".</li>
+    <li>Desative as opções "Supressão de Ruído" e "Cancelamento de Eco".</li>
+    <li>Ajuste a sensibilidade de entrada ("Input Sensitivity") para o mínimo, garantindo que todos os sons do microfone sejam captados.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Usando o Soundpad</h2>
+  <h2>1. Adicionando Sons</h2>
+  <p>Para adicionar sons ao Soundpad, abra o programa e vá para "Arquivo > Adicionar arquivos de som".</p>
+  <p>Selecione os arquivos de áudio desejados (MP3, WAV, etc.) para incluí-los na lista principal do Soundpad.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad3.png" alt="Adicionando Sons ao Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Para organizar os sons, crie categorias personalizadas:</p>
+  <ol>
+    <li>Acesse "Janela > Categorias" e crie uma nova categoria.</li>
+    <li>Arraste os sons para a categoria desejada.</li>
+  </ol>
+  <div style="text-align: center;">
+    <img src="img/soundpad4.png" alt="Criando Categorias no Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <div style="text-align: center;">
+    <img src="img/soundpad5.png" alt="Organizando Sons em Categorias" style="max-width: 100%; height: auto;">
+  </div>
+  <h2>2. Configurando Atalhos</h2>
+  <p>Os atalhos são essenciais para reproduzir sons rapidamente, especialmente durante jogos. Para configurá-los:</p>
+  <ol>
+    <li>Clique com o botão direito no som desejado na lista do Soundpad.</li>
+    <li>Selecione "Definir tecla de atalho".</li>
+    <li>Pressione a tecla ou combinação de teclas desejada (ex.: "P", "Num 1" ou "Ctrl + Q").</li>
+    <li>Clique em "OK" para salvar.</li>
+  </ol>
+  <div style="text-align: center;">
+    <img src="img/soundpad6.png" alt="Configurando Atalhos no Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p><strong>Dica:</strong> Evite teclas simples como Shift ou Ctrl, que podem interferir em outros comandos. A combinação "ALT + Teclado Numérico" é recomendada, mas requer uma configuração adicional.</p>
+  <h2>3. Ativando Atalhos com ALT+Numpad</h2>
+  <p>Para habilitar atalhos com "ALT + Teclado Numérico", vá para "Arquivo > Preferências" e ative a opção "Ativar Alt+teclas de atalhos de Código Numérico".</p>
+  <p>Essa configuração permite mapear inúmeros sons usando combinações como "ALT+300" para o primeiro som adicionado, oferecendo flexibilidade para organizar uma grande quantidade de efeitos sonoros.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad8.png" alt="Ativando Atalhos ALT+Numpad" style="max-width: 100%; height: auto;">
+  </div>
+  <h2>4. Modos de Reprodução</h2>
+  <p>O Soundpad oferece três modos de reprodução:</p>
+  <ul>
+    <li><strong>Padrão (alto-falantes e microfone):</strong> Todos ouvem o som, incluindo você.</li>
+    <li><strong>Somente alto-falantes:</strong> Apenas você ouve o som.</li>
+    <li><strong>Somente microfone:</strong> Apenas os outros ouvem o som pelo chat de voz.</li>
+  </ul>
+  <p>Se você estiver usando o Virtual Audio Cable como saída e tiver ativado a opção "Escutar Dispositivo" nas configurações de áudio do Windows, também ouvirá os sons transmitidos pelo microfone virtual no modo "Somente microfone".</p>
+  <h2>5. Gravando e Editando Sons</h2>
+  <p>O Soundpad inclui um gravador e editor de áudio integrados:</p>
+  <ol>
+    <li>Acesse "Janela > Gravador de Som".</li>
+    <li>Selecione o dispositivo a gravar (microfone ou alto-falantes).</li>
+    <li>Clique no botão azul para iniciar a gravação e no vermelho para parar.</li>
+    <li>O som gravado aparecerá na lista do Soundpad.</li>
+    <li>Para editar, clique com o botão direito no som e selecione "Editar o arquivo". Você pode cortar, ajustar o volume ou aplicar efeitos simples.</li>
+  </ol>
+  <p><strong>Nota:</strong> O editor do Soundpad é básico e não é ideal para arquivos longos (acima de 10 minutos). No entanto, é útil para remover silêncios iniciais ou encurtar efeitos sonoros.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad9.png" alt="Gravador de Som do Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <div style="text-align: center;">
+    <img src="img/soundpad10.png" alt="Editando Sons no Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <h2>6. Dicas Básicas</h2>
+  <p>Para otimizar o uso do Soundpad, siga estas recomendações:</p>
+  <ul>
+    <li><strong>Organize seus sons:</strong> Crie categorias para memes, músicas ou efeitos sonoros, facilitando o acesso.</li>
+    <li><strong>Teste o áudio:</strong> Use a função "Soundpad Self Check" (em "Arquivo > Preferências > Dispositivos") para verificar se os sons estão sendo transmitidos corretamente.</li>
+    <li><strong>Evite conflitos de atalhos:</strong> Escolha teclas que não sejam usadas em jogos ou outros programas.</li>
+    <li><strong>Controle o volume:</strong> Teste os sons antes de usá-los em chats para evitar volumes altos que possam incomodar outros jogadores.</li>
+    <li><strong>Respeite a comunidade:</strong> Em jogos com comunicação séria, como Insurgency, pergunte aos outros jogadores antes de usar efeitos sonoros para evitar ser mutado.</li>
+  </ul>
+  <h2>7. Solução de Problemas Comuns</h2>
+  <p>Se encontrar problemas, verifique as seguintes soluções:</p>
+  <ul>
+    <li><strong>Ninguém ouve os sons:</strong> Confirme se o microfone correto está selecionado no Soundpad e no aplicativo de voz. Desative filtros como supressão de ruído no Discord.</li>
+    <li><strong>Qualidade de áudio ruim:</strong> Ajuste a normalização de volume ou use arquivos de áudio de alta qualidade (evite MP3s de baixa taxa de bits).</li>
+    <li><strong>Atalhos não funcionam:</strong> Verifique se as teclas escolhidas não estão em conflito com outros programas.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Configurações Recomendadas</h2>
+  <h2>8. Configurações Pessoais Recomendadas</h2>
+  <p>Com base na minha experiência, recomendo as seguintes configurações de atalhos:</p>
+  <ul>
+    <li><strong>Page Down:</strong> Para interromper a reprodução de um som. Esse atalho é conveniente, pois não conflita com comandos de jogos e está próximo ao mouse, permitindo parar um efeito rapidamente, caso seja reproduzido por engano.</li>
+    <div style="text-align: center;">
+      <img src="img/soundpad11.png" alt="Atalho Page Down no Soundpad" style="max-width: 100%; height: auto;">
+    </div>
+    <li><strong>Scroll Lock:</strong> Para avançar o som em 5 segundos. Útil ao reproduzir áudios longos, como músicas do YouTube, permitindo pular silêncios ou ir diretamente à parte desejada.</li>
+    <div style="text-align: center;">
+      <img src="img/soundpad12.png" alt="Atalho Scroll Lock no Soundpad" style="max-width: 100%; height: auto;">
+    </div>
+    <li><strong>Pause Break:</strong> Para alternar entre ativar e desativar o Soundpad. Essa tecla é prática, especialmente se você usa muitos atalhos, pois evita a reprodução acidental de sons ao digitar.</li>
+    <div style="text-align: center;">
+      <img src="img/soundpad13.png" alt="Atalho Pause Break no Soundpad" style="max-width: 100%; height: auto;">
+    </div>
+  </ul>
+  <p>No menu de "Preferências", recomendo ativar a opção "Passar teclas de Atalho". Isso permite que as teclas configuradas como atalhos de som também funcionem normalmente em outros programas. Por exemplo, se você configurar o som de "Mário Pulando" na tecla Espaço, poderá pular em um jogo enquanto reproduz o som, desde que essa opção esteja ativa.</p>
+  <p>Outra configuração útil é a "Interrupção automática", que impede que atalhos fiquem em loop caso o modo de repetição esteja ativado.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad14.png" alt="Configurações de Atalhos no Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Em "Interface", sugiro marcar as opções "Comece minimizado", "Mostrar ícone da bandeja do sistema", "Minimizar para a bandeja do sistema", "Minimizar, em vez de fechar" e "Usar cores de linha alternadas" para uma experiência mais prática e visualmente organizada.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad15.png" alt="Configurações de Interface do Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Em "Dispositivos", selecione o microfone "CABLE Output" como padrão se estiver usando o Virtual Audio Cable para integrar com outros programas, como o Balabolka.</p>
+  <div style="text-align: center;">
+    <img src="img/soundpad16.png" alt="Seleção de Dispositivo no Soundpad" style="max-width: 100%; height: auto;">
+  </div>
+  <p>Em "Gravador", recomendo usar o formato WAV para gravações, pois evita perdas de qualidade por compressão e é mais rápido para edição e reprodução, economizando recursos da CPU. Embora os arquivos WAV sejam maiores, isso não é um problema com os padrões atuais de armazenamento. Ative também a normalização de volume para garantir que os áudios gravados tenham o nível de som adequado. Escolha uma pasta de fácil acesso para salvar os arquivos gravados, facilitando seu uso posterior.</p>
+  <div style="text-align: center;">
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tradutor Competitivo. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
