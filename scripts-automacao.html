@@ -14,6 +14,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scripts de Automação - Curso de Áudios Automatizados</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cmd-window {
+      background: #0c0c0c;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 500px;
+      margin: 20px auto;
+      font-family: Consolas, "Courier New", monospace;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .cmd-titlebar {
+      background: #1f1f1f;
+      color: #cccccc;
+      padding: 6px 10px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cmd-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .cmd-dot.red { background: #ff5f56; }
+    .cmd-dot.yellow { background: #ffbd2e; }
+    .cmd-dot.green { background: #27c93f; }
+    .cmd-titlebar span.cmd-title {
+      margin-left: 8px;
+      color: #9a9a9a;
+    }
+    .cmd-body {
+      padding: 14px 16px;
+      color: #f2f2f2;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .cmd-body .cmd-prompt {
+      color: #8ab4f8;
+    }
+    .code-block {
+      background: #0c0c0c;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 600px;
+      margin: 20px auto;
+      font-family: Consolas, "Courier New", monospace;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .code-titlebar {
+      background: #1f1f1f;
+      color: #9a9a9a;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+    .code-body {
+      padding: 14px 16px;
+      color: #f2f2f2;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .code-body .ahk-comment { color: #6a9955; }
+    .code-body .ahk-keyword { color: #c586c0; }
+    .code-body .ahk-string { color: #ce9178; }
+  </style>
 </head>
 <body>
   <header>
@@ -35,29 +104,66 @@
   <main>
 <section>
   <h2>Introdução aos Scripts de Automação de Áudio</h2>
-  <p>Neste guia, você aprenderá a utilizar scripts personalizados que desenvolvi para diversas finalidades, incluindo a obtenção de áudios do site MyInstants para uso em jogos, o download de áudios do YouTube, e a criação de uma assistente virtual estilo "Alexa" com respostas irônicas, piadas e geração de músicas no estilo rap. Estes scripts foram criados de forma improvisada, combinando códigos obtidos de fontes como Stack Overflow e orientações do ChatGPT. Ressalto que não há garantia de funcionamento perfeito em todos os sistemas, sendo recomendável utilizá-los por sua conta e risco, com cautela durante a configuração e execução.</p>
+  <p>Neste guia, você aprenderá a utilizar scripts personalizados que desenvolvi para diversas finalidades, incluindo a obtenção de áudios do site MyInstants para uso em jogos e o download de áudios do YouTube. Os dois scripts já passaram por reescritas: o do MyInstants hoje roda em Python usando APIs nativas do Windows, e o do YouTube usa o yt-dlp com um sistema de cookies para evitar bloqueios. Ressalto que não há garantia de funcionamento perfeito em todos os sistemas, sendo recomendável utilizá-los por sua conta e risco, com cautela durante a configuração e execução.</p>
+</section>
+
+<section>
+  <h2>Instalando o Python (pré-requisito)</h2>
+  <p>O script do MyInstants roda em Python, então antes de tudo você precisa ter uma versão recente do Python instalada no Windows e disponível no PATH do sistema — sem isso, o <code>myinstants.bat</code> não consegue chamar o <code>python</code> pelo terminal e o script simplesmente não roda. Recomendo sempre usar a versão mais recente disponível, já que versões antigas podem não ter os módulos usados pelo script ou apresentar incompatibilidades.</p>
+  <ol>
+    <li>Acesse <a href="https://python.org">python.org</a> e vá até a seção de Downloads.</li>
+    <li>Baixe o instalador da versão mais recente do Python para Windows (botão amarelo "Download Python 3.x.x").</li>
+    <li>Execute o instalador baixado.</li>
+    <li><strong>Muito importante</strong>: na primeira tela do instalador, marque a caixa <code>Add python.exe to PATH</code> (ou <code>Add Python to PATH</code>, dependendo da versão) antes de clicar em "Install Now". É esse passo que adiciona o Python ao PATH do sistema automaticamente.</li>
+    <li>Clique em "Install Now" e aguarde a instalação terminar.</li>
+    <li>Ao final, se aparecer um botão "Disable path length limit", clique nele também — evita problemas com caminhos de arquivo muito longos no Windows.</li>
+    <li>Feche e abra o cmd novamente (janelas já abertas não veem o novo PATH), e digite <code>python --version</code>. Se aparecer o número da versão instalada, deu tudo certo.</li>
+  </ol>
+  <p><strong>Se você já instalou o Python sem marcar "Add to PATH"</strong>, pode adicionar manualmente:</p>
+  <ol>
+    <li>Abra o Menu Iniciar, digite "variáveis de ambiente" e abra "Editar as variáveis de ambiente do sistema".</li>
+    <li>Clique no botão "Variáveis de Ambiente...".</li>
+    <li>Na lista de baixo ("Variáveis do sistema"), selecione a variável <code>Path</code> e clique em "Editar...".</li>
+    <li>Clique em "Novo" e adicione o caminho da pasta onde o Python foi instalado (algo como <code>C:\Users\SeuUsuario\AppData\Local\Programs\Python\Python3xx\</code>).</li>
+    <li>Clique em "Novo" de novo e adicione a subpasta <code>Scripts</code> desse mesmo caminho (ex.: <code>C:\Users\SeuUsuario\AppData\Local\Programs\Python\Python3xx\Scripts\</code>), usada para instalar pacotes como o <code>pip</code>.</li>
+    <li>Clique em "OK" em todas as janelas para salvar.</li>
+    <li>Feche e abra o cmd novamente e digite <code>python --version</code> para confirmar que funcionou.</li>
+  </ol>
+  <p>Com o Python instalado e no PATH, o <code>myinstants.bat</code> já consegue rodar normalmente — só falta instalar a dependência <code>requests</code>, explicada na seção seguinte.</p>
 </section>
 
 <section>
   <h2>Script para Download de Áudio do MyInstants</h2>
-  <p>Este script permite baixar áudios do site MyInstants de forma automatizada, utilizando o conteúdo da área de transferência do Windows. Ele realiza uma busca no site, analisa o código HTML da página de resultados, identifica o primeiro arquivo MP3 encontrado, gera um link de download e salva o áudio como "my.mp3".</p>
-  <p>Para utilizá-lo, faça o download do script <a href="https://www.mediafire.com/file/y37lxsokvve6qwm/MyInstants.zip/file">aqui</a> (mediafire) e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\MyInstants</code>.</p>
+  <p>Este script permite baixar áudios do site MyInstants de forma automatizada, utilizando o conteúdo da área de transferência do Windows. Ele realiza uma busca no site, baixa o primeiro resultado encontrado e toca o áudio, salvando o arquivo como "my.mp3".</p>
+  <p>Faça o download do script <a href="https://www.mediafire.com/file/5fa5oz4559mg4u9/MyInstants.zip/file">aqui</a> e extraia o zip na pasta <code>C:\TRADUTOR\Scripts</code> — os arquivos ficarão em <code>C:\TRADUTOR\Scripts\MyInstants</code>.</p>
   <div style="text-align: center;">
     <img src="img/script1.png" alt="Arquivos do Script MyInstants" style="max-width: 100%; height: auto;">
   </div>
-  <p>A pasta contém diversos arquivos essenciais para o funcionamento do script. O executável principal é o <code>MyInstants.bat</code>, que depende de outros programas, como:</p>
+  <p>A versão atual foi reescrita em Python, eliminando as dependências externas do script original (<code>paste.exe</code>, além de ferramentas portadas do Linux como <code>tail</code>, <code>wget</code>, <code>gawk</code>, <code>cut</code> e <code>sed</code>). Entre as melhorias:</p>
   <ul>
-    <li><code>paste.exe</code>: Captura o conteúdo da área de transferência do Windows.</li>
-    <li>Programas portados do Linux (<code>tail</code>, <code>wget</code>, <code>gawk</code>, <code>cut</code>, <code>sed</code>, entre outros): Realizam a manipulação do código HTML baixado do site para extrair o link de download.</li>
-    <li><code>beep.exe</code>: Emite um bipe para indicar download bem-sucedido ou dois bipes em caso de erro, como áudio não encontrado ou bloqueio pelo site.</li>
-    <li><code>ffplay.exe</code>: Um player de áudio de linha de comando que reproduz o arquivo baixado nos fones de ouvido ou alto-falantes, sem transmiti-lo pelo microfone, permitindo verificar o áudio antes de usá-lo.</li>
+    <li>Leitura do clipboard feita diretamente via API do Windows (<code>ctypes</code>, <code>CF_UNICODETEXT</code>), o que corrigiu um bug de acentuação que fazia palavras como "faustão" virarem "faustÆo" ao ler o clipboard pelo PowerShell.</li>
+    <li>Correção de um bug na busca: o HTML salvo pelo navegador reescreve aspas simples como <code>&amp;#39;</code>, mas o servidor do MyInstants manda aspas simples literais na resposta real — o regex agora aceita os dois formatos.</li>
+    <li>Log de diagnóstico automático (tamanho e início da resposta) quando nenhum resultado é encontrado, o que facilita ajustes futuros caso o site mude novamente.</li>
+    <li>Log de buscas infinito (<code>log_buscas.txt</code>), com data e hora de cada busca, sempre acrescentando ao final sem apagar o histórico.</li>
+    <li>Rotação dos últimos 4 mp3 baixados (<code>1.mp3</code> a <code>4.mp3</code>) mantida, igual ao script original.</li>
+    <li>Barras "/" são removidas do texto do clipboard antes da busca (ex.: "//teste" vira "teste").</li>
+    <li>O console agora mostra, em tempo real, cada etapa: leitura do clipboard, URL de busca, código HTTP, link da página do som, link do mp3, bytes baixados, rotação de arquivos, etc.</li>
   </ul>
-  <p>Embora seja possível reescrever o script usando apenas comandos do PowerShell para torná-lo nativo do Windows, testes indicaram que essa abordagem resulta em um processo significativamente mais lento, levando cerca de 5 segundos por download, enquanto a solução atual, com ferramentas portadas do Linux, é praticamente instantânea.</p>
-  <p><strong>Pré-requisito</strong>: Para o script funcionar corretamente, é necessário ter o Microsoft .NET Framework 3.5 instalado. Caso não tenha, faça o download em <a href="https://www.microsoft.com/pt-BR/download/details.aspx?id=21">https://www.microsoft.com/pt-BR/download/details.aspx?id=21</a>.</p>
+  <p>Com o Python já instalado (veja a seção anterior), abra o cmd e instale a única dependência externa do script:</p>
+  <div class="cmd-window">
+    <div class="cmd-titlebar">
+      <span class="cmd-dot red"></span>
+      <span class="cmd-dot yellow"></span>
+      <span class="cmd-dot green"></span>
+      <span class="cmd-title">Prompt de Comando</span>
+    </div>
+    <div class="cmd-body"><span class="cmd-prompt">C:\Users\SeuUsuario&gt;</span> pip install requests</div>
+  </div>
+  <p><strong>Como usar</strong>: copie o nome de um meme ou áudio (CTRL+C) e dê um duplo clique em <code>myinstants.bat</code>. O script busca no myinstants.com, baixa o primeiro resultado e toca, salvando o áudio como "my.mp3".</p>
   <div style="text-align: center;">
     <img src="img/script2.png" alt="Execução do Script MyInstants" style="max-width: 100%; height: auto;">
   </div>
-  <p>Para usar o script, digite o nome de um meme ou áudio, selecione e copie o texto (CTRL+C) e execute o <code>MyInstants.bat</code>. O áudio será salvo como "my.mp3".</p>
+  <p><strong>Arquivos gerados</strong>: <code>my.mp3</code> (último som baixado), <code>1.mp3</code> a <code>4.mp3</code> (histórico rotativo) e <code>log_buscas.txt</code> (log infinito de buscas).</p>
   <p>Para facilitar o uso em jogos, adicione o arquivo "my.mp3" ao Soundpad e configure um atalho, como ALT+R. Após ouvir o áudio nos fones de ouvido, pressione o atalho para reproduzi-lo no Soundpad, transmitindo-o pelo microfone virtual.</p>
   <div style="text-align: center;">
     <img src="img/script3.png" alt="Atalho no Soundpad para my.mp3" style="max-width: 100%; height: auto;">
@@ -67,44 +173,21 @@
 
 <section>
   <h2>Script para Download de Áudio do YouTube</h2>
-  <p>Este script permite baixar áudios do YouTube a partir de um link ou termo copiado para a área de transferência do Windows, salvando-o como "musica.m4a".</p>
-  <p>Faça o download do script <a href="https://www.mediafire.com/file/nqmcqay7olbwcf1/YouTube.zip/file">aqui</a> e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\Youtube</code>.</p>
+  <p>Este script (<code>musica.bat</code>) lê o texto que estiver na área de transferência do Windows (o que você copiou com CTRL+C), remove "//" do texto se houver, usa o resultado como termo de busca no YouTube, baixa o áudio do primeiro resultado com o <code>yt-dlp</code> e toca um "ding" de aviso seguido do áudio baixado.</p>
+  <p>Faça o download do script <a href="https://www.mediafire.com/file/atiqfduvfr03n93/YouTube.zip/file">aqui</a> e extraia o zip na pasta <code>C:\TRADUTOR\Scripts</code> — os arquivos ficarão em <code>C:\TRADUTOR\Scripts\YouTube</code>.</p>
   <div style="text-align: center;">
     <img src="img/script4.png" alt="Arquivos do Script YouTube" style="max-width: 100%; height: auto;">
   </div>
-  <p>O executável principal é o <code>youtube.bat</code>, que utiliza:</p>
-  <ul>
-    <li><code>youtube-dl.exe</code>: Baixa o áudio do YouTube.</li>
-    <li><code>paste.exe</code>: Lê o conteúdo da área de transferência.</li>
-    <li><code>sed.exe</code>: Remove marcadores como "//" do texto copiado, úteis para evitar que o Balabolka leia o termo pesquisado (caso a opção de ignorar comentários esteja ativada).</li>
-    <li><code>ffplay.exe</code>: Reproduz o áudio baixado nos fones de ouvido.</li>
-    <li><code>kill.bat</code>: Encerra a reprodução do <code>ffplay.exe</code> e o processo do <code>youtube-dl.exe</code>, se necessário.</li>
-  </ul>
-  <p>Por exemplo, se você escrever "//música da Xuxa" e copiar, o script baixará o áudio correspondente sem que o Balabolka o leia, desde que a opção de ignorar comentários ("// Single-line comment") esteja habilitada.</p>
-  <p>Para usar o áudio no Soundpad, adicione o arquivo "musica.m4a" e configure um atalho, como F12.</p>
+  <p><strong>Para que serve o cookies.txt</strong>: o YouTube às vezes bloqueia o yt-dlp pedindo confirmação de que "você não é um robô". Para evitar isso, o script usa um arquivo de cookies que faz o yt-dlp se passar pelo seu navegador logado. Se o script parar de funcionar (erro de login, captcha, "Sign in to confirm you're not a bot"), o cookies.txt provavelmente expirou e precisa ser gerado de novo.</p>
+  <p><strong>Como gerar o cookies.txt (Chrome)</strong>: instale a extensão "Get cookies.txt LOCALLY" na Chrome Web Store, faça login na sua conta do YouTube/Google, acesse youtube.com logado, clique no ícone da extensão, exporte os cookies do site atual no formato Netscape e renomeie o arquivo baixado para "cookies.txt", movendo-o para a pasta do <code>musica.bat</code>.</p>
+  <p><strong>Como gerar o cookies.txt (Firefox)</strong>: o processo é o mesmo, usando uma extensão equivalente disponível na loja de complementos do Firefox (ex.: "Get cookies.txt LOCALLY" ou "cookies.txt").</p>
+  <p><strong>Observações importantes</strong>: use uma conta secundária/dedicada para gerar os cookies, se possível, e nunca compartilhe o cookies.txt com ninguém — ele dá acesso à sua sessão logada do Google/YouTube. Os cookies expiram de tempos em tempos; se o download começar a falhar, gere um novo cookies.txt repetindo os passos acima.</p>
+  <p><strong>Atualizando o yt-dlp</strong>: o YouTube muda seu site com frequência, o que às vezes quebra versões antigas do yt-dlp. O <code>atualizar_ytdlp.bat</code> resolve isso baixando a versão mais recente do <code>yt-dlp.exe</code> automaticamente — use-o quando o script parar de baixar áudio do nada, quando aparecer erro de formato ou extração, ou periodicamente como manutenção preventiva. Basta colocá-lo na mesma pasta do <code>yt-dlp.exe</code> e dar dois cliques.</p>
+  <p><strong>Solução de problemas</strong>: "Nenhum termo de busca encontrado" significa que nada foi copiado antes de rodar o script; erros de login/robô pedem um novo cookies.txt; erros de formato ou extração pedem para rodar o <code>atualizar_ytdlp.bat</code>; se nenhum áudio tocar, confira se <code>ffplay.exe</code>, <code>ding.wav</code> e <code>yt-dlp.exe</code> estão na mesma pasta do <code>musica.bat</code>.</p>
+  <p>Para usar o áudio no Soundpad, adicione o arquivo baixado e configure um atalho, como F12.</p>
   <div style="text-align: center;">
-    <img src="img/script5.png" alt="Atalho no Soundpad para musica.m4a" style="max-width: 100%; height: auto;">
+    <img src="img/script5.png" alt="Atalho no Soundpad para o áudio do YouTube" style="max-width: 100%; height: auto;">
   </div>
-</section>
-
-<section>
-  <h2>Script da Alexa Irônica</h2>
-  <p>O script da "Alexa Irônica" é um conjunto de scripts que integra múltiplos programas e serviços para criar uma assistente virtual com respostas irônicas, piadas e geração de músicas. Devido à sua complexidade e natureza improvisada, não há garantia de funcionamento em todos os sistemas.</p>
-  <p>Faça o download do script <a href="scripts/Alexa.zip">aqui</a> e extraia os arquivos na pasta <code>C:\TRADUTOR\Scripts\Alexa</code>.</p>
-  <div style="text-align: center;">
-    <img src="img/script6.png" alt="Arquivos do Script Alexa Irônica" style="max-width: 100%; height: auto;">
-  </div>
-  <p>O script principal é o <code>chatbot.bat</code>, que analisa o conteúdo da área de transferência do Windows e executa o script correspondente com base no comando inicial:</p>
-  <ul>
-    <li><strong>"alexa"</strong>: Executa o <code>alexa.bat</code>, enviando o texto da área de transferência ao serviço de IA da Pollinations.ai para gerar uma resposta irônica. O resultado é salvo em <code>saida.txt</code> e convertido em áudio pelo <code>Balcon.exe</code> (versão de linha de comando do Balabolka), gerando o arquivo <code>resultado.wav</code>. Adicione este arquivo ao Soundpad com um atalho, como F11.</li>
-    <div style="text-align: center;">
-      <img src="img/script7.png" alt="Atalho no Soundpad para resultado.wav" style="max-width: 100%; height: auto;">
-    </div>
-    <li><strong>"alexapia"</strong>: Executa o <code>alexapiada.bat</code>, selecionando aleatoriamente uma das 1432 piadas do arquivo <code>charadas.txt</code> e sintetizando o áudio, que é enviado diretamente ao <code>CABLE Input</code>.</li>
-    <li><strong>"alexamus"</strong>: Executa o <code>alexamus.bat</code>, usando o GPT-4o para gerar letras de música no estilo rap com base no tema especificado (ex.: "alexamus tema da música"). O áudio é sintetizado pelo <code>Balcon.exe</code>, acelerado e mixado com uma das quatro batidas da pasta <code>batidas</code> usando o <code>ffmpeg</code>, salvando o resultado em <code>resultado.wav</code>.</li>
-    <li><strong>"gpt"</strong>: Solicita uma resposta curta do modelo ChatGPT, sintetizada com a voz masculina Brian Multilingual e salva em <code>resultado.wav</code>.</li>
-    <li><strong>"alexatocar"</strong>: Similar ao script do YouTube, mas com a voz da Alexa dizendo "Entendi, tocando nome da música" antes de baixar o áudio do YouTube e salvá-lo como <code>musica.m4a</code>.</li>
-  </ul>
 </section>
 
 <section>
@@ -115,20 +198,55 @@
   </div>
   <p>Faça o download do AntiMicroX no site oficial: <a href="https://github.com/AntiMicroX/antimicrox/releases">https://github.com/AntiMicroX/antimicrox/releases</a>. Configure atalhos para cada tecla do joystick, associando macros que executam CTRL+A e CTRL+C para copiar o texto para a área de transferência, seguidos da execução do script correspondente.</p>
   <div style="text-align: center;">
-    <img src="img/script9.png" alt="Atalho para youtube.bat no AntiMicroX" style="max-width: 100%; height: auto;">
+    <img src="img/script9.png" alt="Atalho para musica.bat no AntiMicroX" style="max-width: 100%; height: auto;">
   </div>
-  <p>Configure um atalho similar para o <code>chatbot.bat</code> para executar os scripts da Alexa.</p>
-  <div style="text-align: center;">
-    <img src="img/script10.png" alt="Atalho para chatbot.bat no AntiMicroX" style="max-width: 100%; height: auto;">
-  </div>
-  <p>Crie um atalho para o <code>kill.bat</code> (da pasta do script do YouTube), que encerra o <code>ffplay.exe</code> usado para reproduzir áudios do YouTube em segundo plano.</p>
-  <div style="text-align: center;">
-    <img src="img/script11.png" alt="Atalho para kill.bat no AntiMicroX" style="max-width: 100%; height: auto;">
-  </div>
-  <p>Por fim, configure um atalho para o <code>MyInstants.bat</code>, que é especialmente útil para downloads rápidos de áudios do MyInstants.</p>
+  <p>Por fim, configure um atalho para o <code>myinstants.bat</code>, que é especialmente útil para downloads rápidos de áudios do MyInstants.</p>
   <div style="text-align: center;">
     <img src="img/script12.png" alt="Atalho para MyInstants.bat no AntiMicroX" style="max-width: 100%; height: auto;">
   </div>
+</section>
+
+<section>
+  <h2>Automação com AutoHotkey (alternativa sem joystick)</h2>
+  <p>Se você não tem um joystick USB e prefere usar só o teclado, dá para conseguir o mesmo resultado com o <a href="https://www.autohotkey.com/">AutoHotkey</a>, um programa gratuito de automação e criação de atalhos de teclado para Windows. A ideia é a mesma do AntiMicroX: um atalho seleciona o texto, copia para a área de transferência e roda o script — só que aqui os atalhos são combinações de teclado, como <code>CONTROL+WINDOWS+F1</code> para o MyInstants e <code>CONTROL+WINDOWS+F2</code> para o YouTube.</p>
+  <p><strong>Como instalar o AutoHotkey</strong>:</p>
+  <ol>
+    <li>Acesse <a href="https://www.autohotkey.com/">autohotkey.com</a> e clique em "Download".</li>
+    <li>Baixe a versão mais recente (v2), que é a recomendada atualmente pela própria documentação oficial.</li>
+    <li>Execute o instalador baixado e siga o assistente com as opções padrão.</li>
+    <li>Ao final da instalação, o AutoHotkey já fica pronto para rodar arquivos com extensão <code>.ahk</code> — não precisa adicionar nada ao PATH.</li>
+  </ol>
+  <p><strong>Como criar o script dos atalhos</strong>:</p>
+  <ol>
+    <li>Clique com o botão direito em qualquer pasta (pode ser a própria <code>C:\TRADUTOR\Scripts</code>) e escolha <strong>Novo &gt; Script AutoHotkey</strong>. Se essa opção não aparecer no menu, crie um arquivo de texto comum e renomeie a extensão de <code>.txt</code> para <code>.ahk</code>.</li>
+    <li>Dê um nome ao arquivo, por exemplo <code>atalhos.ahk</code>.</li>
+    <li>Clique com o botão direito nesse arquivo e escolha "Editar Script" (ou abra com o Bloco de Notas).</li>
+    <li>Apague o conteúdo padrão e cole o código abaixo, ajustando os caminhos dos <code>.bat</code> se necessário:</li>
+  </ol>
+  <div class="code-block">
+    <div class="code-titlebar">atalhos.ahk</div>
+    <div class="code-body">#Requires AutoHotkey v2.0
+
+; CONTROL+WINDOWS+F1 -> seleciona, copia e roda o script do MyInstants
+^#F1:: {
+    Send "^a"
+    Send "^c"
+    Sleep 100
+    Run "C:\TRADUTOR\Scripts\MyInstants\myinstants.bat"
+}
+
+; CONTROL+WINDOWS+F2 -> seleciona, copia e roda o script do YouTube
+^#F2:: {
+    Send "^a"
+    Send "^c"
+    Sleep 100
+    Run "C:\TRADUTOR\Scripts\YouTube\musica.bat"
+}</div>
+  </div>
+  <p>Nesse código, <code>^</code> significa Ctrl e <code>#</code> significa a tecla Windows, então <code>^#F1</code> é o atalho Ctrl+Win+F1. O <code>Send "^a"</code> seleciona todo o texto do campo onde você está digitando (Ctrl+A), o <code>Send "^c"</code> copia (Ctrl+C), o <code>Sleep 100</code> dá uma pequena pausa para a cópia terminar, e o <code>Run</code> executa o script correspondente.</p>
+  <p><strong>Como usar</strong>: salve o arquivo, dê um duplo clique nele para carregar os atalhos (vai aparecer um ícone verde na bandeja do sistema, perto do relógio) e, com o texto do meme ou música selecionado (ou o cursor no campo de texto), pressione CONTROL+WINDOWS+F1 para o MyInstants ou CONTROL+WINDOWS+F2 para o YouTube.</p>
+  <p><strong>Dica</strong>: para os atalhos ficarem sempre ativos, sem precisar abrir o script manualmente toda vez que ligar o PC, coloque um atalho (Ctrl+C, Ctrl+V "colar como atalho") do arquivo <code>atalhos.ahk</code> na pasta de Inicialização do Windows (pressione Win+R, digite <code>shell:startup</code> e dê Enter para abrir essa pasta).</p>
+  <p>Para consultar mais opções de personalização, como outras teclas e combinações, a documentação oficial de referência de hotkeys fica em <a href="https://www.autohotkey.com/docs/v2/Hotkeys.htm">autohotkey.com/docs/v2/Hotkeys.htm</a>.</p>
 </section>
 
 <section>
